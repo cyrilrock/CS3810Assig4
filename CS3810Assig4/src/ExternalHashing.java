@@ -10,17 +10,26 @@ import java.io.RandomAccessFile;
 
 public class ExternalHashing {
 
-	public static void main(String[] args) throws EOFException, IOException 
+	public static void main(String[] args) throws IOException 
 	{
 		Scanner scan = new Scanner(System.in);
 		int inputBlock = 0, inputRecord = 0;
 		RandomAccessFile f = null;
 		
-		try
+		try 
 		{
-			f = new RandomAccessFile("HashingEX", "rw");
+			f = new RandomAccessFile("newfile.txt", "rw");
 			f.seek(0);
-			
+		} 
+		catch (Exception e) 
+		{
+			System.out.println("Cannot write\n " + e);
+		}
+		
+		
+		
+		try
+		{	
 			System.out.print("Enter the Block Size: ");
 			inputBlock = scan.nextInt();
 			System.out.print("\nEnter the # of Records: ");
@@ -94,6 +103,10 @@ public class ExternalHashing {
 		catch (Exception e) 
 		{
 			e.printStackTrace();
+		}
+		finally
+		{
+			f.close();
 		}
 
 	}

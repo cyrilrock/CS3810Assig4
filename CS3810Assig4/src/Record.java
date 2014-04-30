@@ -13,8 +13,8 @@ public class Record
 	
 	public Record()
 	{
-		name="";
-		id="";
+		name=" ";
+		id=" ";
 	}
 	
 	public Record(String newName, String newId)
@@ -51,7 +51,7 @@ public class Record
 		
 		for (int i = 0; i < chs.length; i++)
 		{
-			chs[i]=file.readChar();
+			chs[i] = file.readChar();
 		}
 		
 		String theStr = new String(chs);
