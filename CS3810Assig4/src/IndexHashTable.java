@@ -18,8 +18,12 @@ public class IndexHashTable
 		arraySize = newSize;
 		maxRecord = newMaxRecord;
 		
+		hashArray = new Integer[arraySize];
+		
 		for (int i = 0; i < arraySize; i++)
+		{
 			hashArray[i] = i;
+		}
 		
 		List<Integer> hashArrayList = Arrays.asList(hashArray);
 		Collections.shuffle(hashArrayList);
@@ -78,7 +82,7 @@ public class IndexHashTable
 		return -2;		
 	}
 	
-	public int search(RandomAccessFile file, int newId)
+	public String search(RandomAccessFile file, int newId)
 	{
 		int hashValue = hashFunc(newId);
 		int startOffset = hashArray[hashValue] * maxRecord * 40;
@@ -94,7 +98,7 @@ public class IndexHashTable
 				
 				if(tempCompareRec.getId().equals(newId))
 				{
-					return 0;
+					return tempCompareRec.toString();
 				}
 				else 
 					startOffset += 40;
@@ -104,6 +108,6 @@ public class IndexHashTable
 				e.printStackTrace();
 			}
 		}
-		return 1;
+		return "Not Found";
 	}
 }
