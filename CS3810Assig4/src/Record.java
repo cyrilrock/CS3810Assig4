@@ -11,6 +11,7 @@ public class Record
 	private int NAMELENGTH=16;
 	private int IDLENGTH=4;
 	
+	
 	public Record()
 	{
 		name=" ";
@@ -23,16 +24,22 @@ public class Record
 		id= newId;
 	}
 	
-	public void read(RandomAccessFile file) throws IOException
+	public void read(RandomAccessFile file) //throws IOException
 	{
 		name= readString(file, NAMELENGTH);
 		id = readString(file, IDLENGTH);
 	}
 	
-	public void write(RandomAccessFile file) throws IOException
+	public void write(RandomAccessFile file) //throws IOException
 	{
-		writeStr(file, name, NAMELENGTH);
-		writeStr(file, id, IDLENGTH);
+		try {
+			writeStr(file, name, NAMELENGTH);
+			writeStr(file, id, IDLENGTH);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public String getId()
@@ -45,13 +52,18 @@ public class Record
 		return name;
 	}
 	
-	private String readString(RandomAccessFile file, int strLength) throws IOException
+	private String readString(RandomAccessFile file, int strLength) //throws IOException
 	{
 		char[] chs = new char[strLength];
 		
 		for (int i = 0; i < chs.length; i++)
 		{
-			chs[i] = file.readChar();
+			try {
+				chs[i] = file.readChar();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		String theStr = new String(chs);
@@ -75,4 +87,6 @@ public class Record
 	{
 		return "\nName: " + name + "\nID: " + id;
 	}
+	
+	
 }

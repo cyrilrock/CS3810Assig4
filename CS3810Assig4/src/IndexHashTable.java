@@ -46,7 +46,7 @@ public class IndexHashTable
 		
 		Record tempCompareRec = new Record();
 		
-				
+		//rec.write(file);
 		for(int i = 0; i < maxRecord + 1; i++)
 		{
 			try 
@@ -55,7 +55,7 @@ public class IndexHashTable
 				tempCompareRec.read(file);
 			
 
-				if(i==maxRecord)
+				/*if(i==maxRecord)
 				{
 					return -1;
 				}
@@ -72,6 +72,17 @@ public class IndexHashTable
 						return 0;
 				}
 				else
+					startOffset += 40;*/
+				if(tempCompareRec.getId().trim().equals(" "))
+				{
+					rec.write(file);
+					return 0;
+				}
+				else if (tempCompareRec.getId().trim().equals(rec.getId()))
+					return 1;
+				else if (i == maxRecord)
+					return -1;
+				else if (!(tempCompareRec.getId().trim().equals(rec.getId())))
 					startOffset += 40;
 			} 
 			catch (Exception e) 
@@ -79,7 +90,7 @@ public class IndexHashTable
 				e.printStackTrace();
 			}
 		}
-		return -2;		
+		return 0;		
 	}
 	
 	public String search(RandomAccessFile file, int newId)
