@@ -1,12 +1,6 @@
 import java.io.IOException;
 import java.util.*;
-
-/*
- * Cyril Thomas
- * */
-
 import java.io.*;
-import java.io.RandomAccessFile;
 
 public class ExternalHashing {
 
@@ -19,7 +13,7 @@ public class ExternalHashing {
 		try 
 		{
 			f = new RandomAccessFile("newfile.txt", "rw");
-			f.seek(0);
+		
 		} 
 		catch (Exception e) 
 		{
@@ -39,6 +33,15 @@ public class ExternalHashing {
 		{
 			e.printStackTrace();
 			scan.nextLine();
+		}
+		
+		try {
+			Record tempCompareRec = new Record();
+			
+			for (int i =0 ; i<=(inputBlock*inputRecord); i++)
+				tempCompareRec.write(f);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		IndexHashTable data = new IndexHashTable(inputBlock, inputRecord);

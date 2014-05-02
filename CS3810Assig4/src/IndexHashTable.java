@@ -28,7 +28,8 @@ public class IndexHashTable
 		List<Integer> hashArrayList = Arrays.asList(hashArray);
 		Collections.shuffle(hashArrayList);
 		hashArray = hashArrayList.toArray(new Integer[hashArrayList.size()]);
-		
+		for(int i = 0; i<hashArray.length;i++)
+			System.out.println("\t" + hashArray[i]);
 	}
 	
 	public int hashFunc(int key)
@@ -46,11 +47,14 @@ public class IndexHashTable
 		
 		Record tempCompareRec = new Record();
 		
-		//rec.write(file);
+		/*for (int i =0 ; i<=(arraySize*maxRecord); i++)
+			tempCompareRec.write(file);*/
+		
 		for(int i = 0; i < maxRecord + 1; i++)
 		{
 			try 
 			{
+				System.out.println("Pointer: "+startOffset);
 				file.seek(startOffset);
 				tempCompareRec.read(file);
 			
@@ -73,12 +77,14 @@ public class IndexHashTable
 				}
 				else
 					startOffset += 40;*/
-				if(tempCompareRec.getId().trim().equals(" "))
+				
+				System.out.println("Temp ID: "+tempCompareRec.getId());
+				if(tempCompareRec.getId()=="nul")
 				{
 					rec.write(file);
 					return 0;
 				}
-				else if (tempCompareRec.getId().trim().equals(rec.getId()))
+				else if (tempCompareRec.getId().equals(rec.getId()))
 					return 1;
 				else if (i == maxRecord)
 					return -1;
